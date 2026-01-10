@@ -1,17 +1,19 @@
-import {signUpStudent} from "./actions.js"
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
 
-export default function StudentPage () {
- 
+export default async function StudentPage() {
+  const supabase = await createClient();
+  const result = await supabase.auth.getUser();
+  const user = result.data.user;
+  console.log (user);
+
+  if (!user) 
+    redirect("/student/login");
+
   return (
-    <div className = "mx-auto max-w-sm min-h-screen flex justify-center">
-    <form className = "flex flex-col gap-4">
-      <h1 className = "mb-4 text-xl font-semibold">Sign up</h1>
-      <label>Email</label>
-      <input name = "email" type = "email" placeholder = "name@uwaterloo.ca" className = "border p-1"/>
-      <label>Password</label>
-      <input name = "password" type = "password" placeholder = "*********" className = "border p-1"/>
-      <button formAction = {signUpStudent} className = "cursor-pointer hover:bg-gray-50 border p-2" type = "submit">Submit</button>
-    </form>
-    </div>  
+    <div className = "flex flex-col items-center max-w min-h-screen">
+      <h1>Student Dashboard</h1>
+
+    </div>
   );
 }
