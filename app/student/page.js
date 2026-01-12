@@ -22,11 +22,13 @@ export default async function StudentPage() {
       <div className = "mt-15 px-6 flex flex-row">
           {items ? items.map((item) => {
             return (
-              <div className = "border rounded-lg px-3 py-2 ml-6" key={item.id}>
+              <Link  key = {item.id} href = {`/student/item/${item.id}`}>
+              <div className = "border rounded-lg px-3 py-2 ml-6">
               <p>Title: {item.title}</p>
               <p>Location: {item.location}</p>
               <p>Description: {item.description}</p>
               </div>
+              </Link>
           )}): ""}
       </div>
 
