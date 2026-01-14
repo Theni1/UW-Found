@@ -15,7 +15,7 @@ export default function Upload() {
             <input name = "location" className = "border" type = "text" placeholder = "" required/>
             <label>Description:</label>
             <input name = "description" className = "border" type = "text" placeholder = "" required/>
-            <button formAction = {uploadStudentItem}className = "border px-2 py-1 mt-3 cursor-pointer">Submit</button>            
+            <button formAction = {uploadStudentItem} className = "border px-2 py-1 mt-3 cursor-pointer">Submit</button>            
         </form>
     </div>
   )

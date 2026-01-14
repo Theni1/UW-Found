@@ -24,6 +24,7 @@ export default async function StudentPage() {
             return (
               <Link  key = {item.id} href = {`/student/item/${item.id}`}>
               <div className = "border rounded-lg px-3 py-2 ml-6">
+              <p>{item.status}</p>
               <p>Title: {item.title}</p>
               <p>Location: {item.location}</p>
               <p>Description: {item.description}</p>
