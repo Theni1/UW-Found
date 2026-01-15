@@ -2,7 +2,7 @@
 
 import {useState} from "react"
 
-export default function Status({id, userEmail}) {
+export default function Status({id}) {
     const [info, setInfo] = useState (null)
     const [data, setData] = useState (null)
     async function claimItem (e) {

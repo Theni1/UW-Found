@@ -1,6 +1,5 @@
 "use client"
 
-import {useState} from "react"
 import {signUpStudent} from "./actions.js"
 
 export default function StudentPage () {

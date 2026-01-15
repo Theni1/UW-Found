@@ -16,17 +16,28 @@ export async function handleSubmit(formData) {
     redirect('/student/signup')
   }
 
-  const { error } = await supabase
+  const { error: claimError } = await supabase
+    .from("claims")
+    .update({
+      status: decision === "accepted" ? "Accepted" : "Rejected",
+      status_response: info,
+    })
+    .eq("item_id", itemId)
+    .eq("status", "Pending");
+
+  if (claimError) {
+    throw new Error(claimError.message);
+  }
+
+  const { error: itemError } = await supabase
     .from("lost_items")
     .update({
-      status_decision: decision === "accepted" ? "Accepted" : "Rejected",
       status: decision === "accepted" ? "Claimed" : "Unclaimed",
-      status_response: info,
     })
     .eq("id", itemId);
 
-  if (error) {
-    throw new Error(error.message);
+  if (itemError) {
+    throw new Error(itemError.message);
   }
 
   redirect("/student");

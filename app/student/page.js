@@ -7,7 +7,7 @@ export default async function StudentPage() {
   const supabase = await createClient();
   const result = await supabase.auth.getUser();
   const user = result.data.user;
-  const { data:items, error } = await supabase
+  const { data:items} = await supabase
   .from('lost_items')
   .select()
   if (!user) 
@@ -20,8 +20,8 @@ export default async function StudentPage() {
       <Link href="/student/upload" className="border py-1 px-2"> Upload </Link>
       </div>
       <div className = "mt-15 px-6 flex flex-row">
-          {items ? items.map((item) => {
-            return (
+          {items ? items.map((item) => 
+               item.status == "Unclaimed" || item.status == "Pending" ?
               <Link  key = {item.id} href = {`/student/item/${item.id}`}>
               <div className = "border rounded-lg px-3 py-2 ml-6">
               <p>{item.status}</p>
@@ -30,7 +30,8 @@ export default async function StudentPage() {
               <p>Description: {item.description}</p>
               </div>
               </Link>
-          )}): ""}
+              : ""
+          ): ""}
       </div>
 
     </div>

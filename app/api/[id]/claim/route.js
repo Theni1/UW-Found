@@ -7,28 +7,32 @@ export async function POST(req, {params}) {
   const supabase = await createClient();
 
   const {data: {user}} = await supabase.auth.getUser();
-
   if (!user) {
     return NextResponse.json({success: false, data: "Not authenticated"});
   }
-  const { data, error } = await supabase
-    .from("lost_items")
-    .update({
-      status: "pending",
-      status_info: info,
-      status_email: user.email,      
-    })
-    .eq("id", id)
-    .eq("status", "Unclaimed")
-    .select()
-    .single()
+  const { error: claimError } = await supabase
+  .from("claims")
+  .insert({
+    item_id: id,
+    claimer_id: user.id,
+    claimer_email: user.email,
+    claimer_info: info,
+    status: "Pending",
+  });
 
-  if (error) {
-    return NextResponse.json({ success: false , data: error.message});
+  if (claimError) {
+    return NextResponse.json({ success: false, data: claimError.message });
   }
 
-  if (data.length === 0) {
-    return NextResponse.json({ success: false , data: "Item already claimed"});
+  const { error: itemError } = await supabase
+  .from("lost_items")
+  .update({ status: "Pending" })
+  .eq("id", id)
+  .eq("status", "Unclaimed");
+
+  if (itemError) {
+    return NextResponse.json({ success: false, data: itemError.message });
   }
-  return NextResponse.json({ success: true , data: "Item claimed"});
+
+  return NextResponse.json({ success: true , data: "Item claim sent successfully"});
 }

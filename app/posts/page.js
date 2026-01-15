@@ -5,23 +5,35 @@ export default async function Posts() {
     const supabase =  await createClient()
     const result = await supabase.auth.getUser();
     const user = result.data.user;
-    const { data: items, error } = await supabase
+    const { data: items } = await supabase
     .from("lost_items")
-    .select()
-    .eq("user_id", user.id);
+    .select(`
+        id,
+        title,
+        location,
+        description,
+        status,
+        claims (
+        id,
+        status,
+        claimer_info
+        )
+    `)
+  .eq("poster_id", user.id);
+  
     if (!user) 
         redirect("/student/login");
     return (
         <div>
         {items ? items.map ( (item) => {
+            const pendingClaim = item.claims?.find((claim) => claim.status === "Pending");
             return(
             <div className = "border my-4 pl-4" key = {item.id}>
                 <p>Title: {item?.title}</p>
                 <p>Location: {item?.location}</p>
                 <p>Description: {item?.description}</p>
                 <p>Claim info: {item?.status_info}</p>
-                {item.status == 'pending' ? 
-                <>
+                { (pendingClaim && item.poster_id === user.id)? 
                 <div className="flex gap-4 mb-2">
                     <form action = {handleSubmit}>
                     <input type="hidden" name="item_id" value={item.id} />
@@ -33,7 +45,6 @@ export default async function Posts() {
                     <button type = "submit" className="border mb-3 px-2 py-1 cursor-pointer"> Submit </button>
                     </form>
                 </div>
-                </>
                 : item.status == 'Claimed' ? <p>Claimed</p>: <p>No claims yet</p>}
             </div>
             )})

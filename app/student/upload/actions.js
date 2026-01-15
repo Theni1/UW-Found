@@ -21,7 +21,7 @@ export async function uploadStudentItem(formData) {
         title: item,
         location: location,
         description: description,
-        user_id: user.id
+        poster_id: user.id,
     });
     if (error) {
         throw new Error("Failed to upload item");
