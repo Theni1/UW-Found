@@ -45,7 +45,7 @@ export default async function Posts() {
                     <button type = "submit" className="border mb-3 px-2 py-1 cursor-pointer"> Submit </button>
                     </form>
                 </div>
-                : item.status == 'Claimed' ? <p>Claimed</p>: <p>No claims yet</p>}
+                : item.status == 'Claimed' ? <p>Claimed</p>: <p>No more claims</p>}
             </div>
             )})
         : "No claims made"}
