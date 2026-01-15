@@ -33,7 +33,7 @@ export default async function Posts() {
                 <p>Location: {item?.location}</p>
                 <p>Description: {item?.description}</p>
                 <p>Claim info: {item?.status_info}</p>
-                { (pendingClaim && item.poster_id === user.id)? 
+                { pendingClaim ? 
                 <div className="flex gap-4 mb-2">
                     <form action = {handleSubmit}>
                     <input type="hidden" name="item_id" value={item.id} />
