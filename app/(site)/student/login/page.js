@@ -1,6 +1,7 @@
 "use client"
 import {loginStudent} from "./actions.js"
 import { useSearchParams } from "next/navigation.js";
+export const dynamic = "force-dynamic";
 
 export default function StudentPage () {
   const searchParams = useSearchParams();
