@@ -1,13 +1,21 @@
 "use client"
+import { Suspense } from "react";
 import {loginStudent} from "./actions.js"
 import { useSearchParams } from "next/navigation.js";
 export const dynamic = "force-dynamic";
 
 export default function StudentPage () {
+  return (
+    <Suspense fallback = {null}>
+    <LoginForm/>
+    </Suspense>
+  )
+}
+function LoginForm () {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   return (
-    <div className = "min-h-[calc(100vh-5rem)] flex justify-center items-center bg-white text-black">
+  <div className = "min-h-[calc(100vh-5rem)] flex justify-center items-center bg-white text-black">
     <form action = {loginStudent} className = "flex flex-col gap-2 w-full max-w-sm mx-auto border border-white rounded-xl p-6 shadow-lg">
       <h1 className = "mb-4 text-xl font-bold text-center tracking-wide">Log in</h1>
       <label className = "text-sm font-bold">Email</label>
@@ -18,5 +26,5 @@ export default function StudentPage () {
       <button className = "self-center cursor-pointer bg-yellow-400 text-black font-bold px-4 py-2 rounded-xl shadow-lg hover:transform transition-transform duration-200 hover:scale-105 mt-4" type = "submit">Submit</button>
     </form>
     </div>  
-  );
+  )
 }
