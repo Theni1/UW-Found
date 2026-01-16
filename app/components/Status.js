@@ -17,9 +17,9 @@ export default function Status({id}) {
     return (
         <>
         <form onSubmit = {claimItem}>
-            <label>Info:</label>
-            <input onChange = { (e) => setInfo(e.target.value)} className = "border mx-4"name = "info" placeholder = ""/>
-            <button type = "submit" className = "border px-1 py-2 rounded-xl cursor-pointer">Request a claim</button>
+            <label className="text-xl font-semibold mb-2">Info:</label>
+            <input onChange = { (e) => setInfo(e.target.value)} className = "border mx-4 rounded-lg"name = "info" placeholder = ""/>
+            <button type = "submit" className= "mt-5 cursor-pointer inline-block bg-yellow-400 text-black font-bold px-4 py-2 rounded-xl shadow-lg hover:transform transition-transform duration-200 hover:scale-105">Request a claim</button>
         </form>
         <p className = "text-small">{data ? data?.data : ""}</p>
         </>

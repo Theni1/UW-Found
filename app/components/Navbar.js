@@ -20,7 +20,6 @@ export default async function Navbar () {
             <div className="flex flex-row gap-6 pr-3 text-yellow-400 text-sm font-semibold">
                 {user ?
                 <>
-                <Link className = "font-medium cursor-pointer hover:text-yellow-300 transition-colors"  href ="/">Home</Link>
                 <Link className = "font-medium cursor-pointer hover:text-yellow-300 transition-colors" href = "/student">Student Dashboard</Link>
                 <Link className = "font-medium cursor-pointer hover:text-yellow-300 transition-colors" href = "/posts">My Posts</Link>
                 <Link className = "font-medium cursor-pointer hover:text-yellow-300 transition-colors" href = "/claims">My Claims</Link>
