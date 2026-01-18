@@ -20,14 +20,29 @@ UW-Found provides a centralized platform for managing lost-and-found items for u
 
 ## How to run locally
 
-1. git clone https://github.com/Theni1/UW-Found.git
-2. npm install
-3. Create a local file named .env.local with:
-   NEXT_PUBLIC_SUPABASE_URL=your_api_key
-   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_api_key
-4. Set up Supabase (auth + database)
-5. npm run dev
+Clone the repository and install the dependencies:
+```
+git clone https://github.com/Theni1/CarDetect.git
+cd CarDetect
+npm install
+```
+Create a local `.env.local` file with the following:
+```
+NEXT_PUBLIC_SUPABASE_URL=your_api_key
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_api_key
+```
+Set up Supabase (Auth + Database)
 
+1. Create a new Supabase project.
+2. Enable **Email/Password authentication**.
+3. Create the required tables:
+   - `lost_items`
+   - `claims`
+
+Start the development server:
+```
+npm run dev
+```
 
 
 
