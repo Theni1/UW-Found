@@ -22,8 +22,7 @@ UW-Found provides a centralized platform for managing lost-and-found items for u
 
 Clone the repository and install the dependencies:
 ```
-git clone https://github.com/Theni1/CarDetect.git
-cd CarDetect
+git clone https://github.com/Theni1/UW-Found.git
 npm install
 ```
 Create a local `.env.local` file with the following:
